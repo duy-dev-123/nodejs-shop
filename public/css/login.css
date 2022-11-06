@@ -81,7 +81,7 @@ html {
   
   /* FORM TYPOGRAPHY*/
   
-  input[type=button], input[type=submit], input[type=reset]  {
+  input[type=button], input[type=submit], input[type=reset], input[type=checkbox]  {
     background-color: #56baed;
     border: none;
     color: white;
@@ -115,7 +115,7 @@ html {
     transform: scale(0.95);
   }
   
-  input[type=text],input[type=password] {
+  input[type=text],input[type=password], input[type=checkbox] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -136,9 +136,9 @@ html {
     border-radius: 5px 5px 5px 5px;
   }
   
-  input[type=text],input[type=password]:focus {
+  input[type=text],input[type=password] {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border: 2px solid #5fbae9;
   }
   
   input[type=text],input[type=password]:placeholder {

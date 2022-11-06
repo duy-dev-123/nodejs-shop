@@ -17,10 +17,15 @@
     />
 
     <title><%=title%></title>
+    <style>
+      .example::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
   </head>
   <body class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-      <a class="navbar-brand" href="/">Company </a>
+      <a class="navbar-brand" href="/<%=title%>">Company </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -36,19 +41,19 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/"
+            <a class="nav-link" href="/<%=title%>"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/card"
+            <a class="nav-link" href="/<%=title%>"
               >Card <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
-              href="/products"
+              href="/<%=title%>"
               id="navbarDropdown"
               role="button"
               data-toggle="dropdown"
@@ -65,163 +70,134 @@
             </div>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form action="/logout" method="POST" class="form-inline my-2 my-lg-0">
           <button class="btn btn-danger my-2 my-sm-0" type="submit">
             Login out
           </button>
         </form>
       </div>
     </nav>
-    <div class="container pt-5">
-      <div class="card-deck">
-        <div class="row">
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
+    <div class="container mt-2">
+      <div class="container">
+       
+      </div>
+      <% if (edit) { %>
+        <form
+          class="col-12 p-4 container"
+          action="/update-product?id=<%=edit.id%>"
+          method="POST"
+          style="background-color: white; border-radius: 10px"
+        >
+          <div class="form-group">
+            <label for="exampleInputEmail1"><strong>Product</strong></label>
+            <input
+              type="text"
+              name="product"
+              required
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="<%=edit.name%>"
+              value="<%=edit.name%>"
+            />
           </div>
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1"><strong>Price</strong></label>
+            <input
+              type="number"
+              name="price"
+              required
+              value="<%=edit.price%>"
+              min="0"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="<%=edit.price%>"
+            />
           </div>
 
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mt-3">
-            <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
+          <button type="submit" class="btn btn-primary">Update product</button>
+        </form>
+      <% } %>
+      <% if (!edit) { %>
+        <form
+        class="col-12 p-4 container"
+        action="/add-product"
+        method="POST"
+        style="background-color: white; border-radius: 10px"
+      >
+        <div class="form-group">
+          <label for="exampleInputEmail1"><strong>Product</strong></label>
+          <input
+            type="text"
+            name="product"
+            required
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Product"
+          />
         </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1"><strong>Price</strong></label>
+          <input
+            type="number"
+            name="price"
+            required
+            value="0"
+            min="0"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Price"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add product</button>
+      </form>
+      <% } %>
+      <div
+        class="container mt-2 example"
+        style="height: 400px; overflow-y: scroll"
+      >
+        <table
+          class="table table-light mt-3"
+          style="
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+          "
+        >
+          <thead>
+            <tr>
+              <th colspan="4" scope="col" style="text-align: center">
+                List Products
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">.No</th>
+              <th scope="col">Name Product</th>
+              <th scope="col">Price Product</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+            <% for(var i=0; i < data.length; i++) { %>
+            <tr>
+              <th scope="row"><%=i+1%></th>
+              <th scope="col"><%= data[i].name %></th>
+              <th scope="col"><%= data[i].price %> VND</th>
+              <th scope="col">
+               <a href='?edit=<%= data[i].id %>'><button class="btn btn-success">Edit</button></a> 
+              </th>
+              <th scope="col">
+               <a href='?delete=<%= data[i].id %>'> <button class="btn btn-danger">Delete</button></a>
+              </th>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
       </div>
     </div>
 
