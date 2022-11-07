@@ -1,12 +1,13 @@
 const { Client } = require("pg");
-require('dotenv').config()
 const client = new Client({
-  user: process.env.USERNAME,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: process.env.PORT,
-  ssl: true,
+    user:'harseggtektufs',
+    password:'652952652f0a4b73ff536d5ee0711e9f92b7f57353904f75a130d95b4faac223',
+    host:'ec2-44-195-100-240.compute-1.amazonaws.com',
+    database:'d4bs0p4r9f27gm',
+    port:5432,
+    ssl: {
+        rejectUnauthorized: false
+    },
 });
 const selectProduct = async (request, response, next) => {
   if (request.query.delete) {
