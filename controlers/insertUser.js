@@ -1,13 +1,14 @@
 const { Client } = require("pg");
 const bcrypt = require("bcrypt");
+require('dotenv').config()
 var jwt = require("jsonwebtoken");
 const client = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "db-shopping",
-  password: "123456",
-  port: "5432",
-  ssl: false,
+  user: process.env.USERNAME,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
+  ssl: true,
 });
 
 const insertUser = async (request, response) => {
