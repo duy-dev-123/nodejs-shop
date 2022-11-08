@@ -135,7 +135,7 @@ const insertOrder = async (req,res,next)=>{
       }
     });
     await client.query(
-      `INSERT INTO "order" ("id_user","id_product", "qty","price","name_product","img")  
+      `INSERT INTO "orders" ("id_user","id_product", "qty","price","name_product","img")  
              VALUES ($1, $2, $3, $4, $5, $6)`,
       [id,id_product,Number(qty),Number(price),name,img]
     );
@@ -154,7 +154,7 @@ const selectIdOrder = async(request,response,next)=>{
       }
     });
     await client.query(
-      `SELECT * FROM "order" WHERE id_user = $1`,
+      `SELECT * FROM "orders" WHERE id_user = $1`,
       [Number(id)],
       (err, res) => {
         if (err) {
@@ -179,7 +179,7 @@ const removeCart = async(request,response,next)=>{
     }
   });
   await client.query(
-    `DELETE  FROM "order" WHERE id_order = $1`,
+    `DELETE  FROM "orders" WHERE id_order = $1`,
     [Number(request.query.id)],
     (err, res) => {
       if (err) {
