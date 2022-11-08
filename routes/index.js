@@ -2,11 +2,22 @@ var express = require("express");
 var router = express.Router();
 var database = require("../controlers/insertUser.js");
 var middlewars = require("../middlewares/auth.js");
-var admin = require("../controlers/admin.js");
+var shop = require("../controlers/admin.js");
+
+/* GET login langing. */
+router.get("", function (req, res, next) {
+  res.redirect('/login')
+});
 /* GET home page. */
-router.get("/", middlewars.verifyToken,admin.selectProduct ,function (req, res, next) {
+router.get("/user", middlewars.verifyToken,shop.selectProduct ,function (req, res, next) {
   res.render("user/home", { title: "Home",data: req.data  });
 });
+
+/* GET home page. */
+router.get("/user/detail-product", middlewars.verifyToken,shop.selectIdProduct ,function (req, res, next) {
+  res.render("user/detail", { title: "Detail",detail:req.detail });
+});
+
 /* GET login page. */
 router.get("/login", function (req, res, next) {
   res.render("login/index", { title: "Login" });
@@ -16,17 +27,26 @@ router.get("/login", function (req, res, next) {
 router.get("/register", function (req, res, next) {
   res.render("register/index", { title: "Register" });
 });
+/* GET cart page. */
+router.get("/cart",middlewars.verifyToken,database.selectIdOrder ,function (req, res, next) {
+  res.render("user/cart", { title: "Cart", cart:req.cart });
+});
 
 /* GET login page. */
 router.get(
-  "/admin",
+  "/shop",
   middlewars.verifyToken,
-  admin.selectProduct,
+  shop.selectProduct,
   function (req, res, next) {
     console.log(req.edit);
-    res.render("admin/index", { title: "Admin", data: req.data, edit: req.edit });
+    res.render("shop/index", { title: "Shop", data: req.data, edit: req.edit });
   }
 );
+
+/* GET login langing. */
+router.get("/admin", database.selectAllUser ,middlewars.verifyToken ,function (req, res, next) {
+  res.render("admin/index", { title: "Shop", data:req.data_all_user });
+});
 
 /* POST login  */
 router.post("/login", database.loginUser);
@@ -45,4 +65,12 @@ router.post("/logout", function (req, res, next) {
   res.redirect('/login')
   next()
 });
+
+/* POST add cart  */
+router.post("/cart-product", middlewars.verifyToken, database.insertOrder);
+
+// remove-cart
+/* POST remove-cart */
+router.post("/remove-cart", middlewars.verifyToken, database.removeCart);
+
 module.exports = router;

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <title><%=title%></title>
+    <style>
+      .example::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <a class="navbar-brand" href="/<%=title%>">Shop </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/<%=title%>"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/<%=title%>"
+              >Card <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="/<%=title%>"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Products
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form action="/logout" method="POST" class="form-inline my-2 my-lg-0">
+          <button class="btn btn-danger my-2 my-sm-0" type="submit">
+            Login out
+          </button>
+        </form>
+      </div>
+    </nav>
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <div class="col-4">
+          <% if (edit) { %>
+            <form
+              class="col-12 p-4 container"
+              action="/update-product?id=<%=edit.id%>"
+              method="POST"
+              style="background-color: white;"
+            >
+              <div class="form-group">
+                <label for="exampleInputEmail1"><strong>Product</strong></label>
+                <input
+                  type="text"
+                  name="product"
+                  required
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="<%=edit.name%>"
+                  value="<%=edit.name%>"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1"><strong>Image product url: </strong></label>
+                <input
+                  type="text"
+                  name="img"
+                  required
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  value="<%=edit.img%>"
+                  aria-describedby="emailHelp"
+                  placeholder="<%=edit.img%>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1"><strong>Quantity: </strong></label>
+                <input
+                  type="number"
+                  name="qty"
+                  required
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  value="<%=edit.qty%>"
+                  aria-describedby="emailHelp"
+                  placeholder="<%=edit.qty%>"
+                  min="0"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1"><strong>Price</strong></label>
+                <input
+                  type="number"
+                  name="price"
+                  required
+                  value="<%=edit.price%>"
+                  min="0"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="<%=edit.price%>"
+                />
+              </div>
+    
+              <button type="submit" class="btn btn-danger">Update product</button>
+            </form>
+          <% } %>
+          <% if (!edit) { %>
+            <form
+            class="col-12 p-4 container"
+            action="/add-product"
+            method="POST"
+            style="background-color: white;"
+          >
+            <div class="form-group">
+              <label for="exampleInputEmail1"><strong>Product</strong></label>
+              <input
+                type="text"
+                name="product"
+                required
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Product"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"><strong>Image product url: </strong></label>
+              <input
+                type="text"
+                name="img"
+                required
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="URL"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"><strong>Quantity: </strong></label>
+              <input
+                type="number"
+                name="qty"
+                required
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                min="0"
+                placeholder="Quantity"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1"><strong>Price</strong></label>
+              <input
+                type="number"
+                name="price"
+                required
+                value="0"
+                min="0"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Price"
+              />
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Add product</button>
+          </form>
+          <% } %>
+        </div>
+        <div class="col-8">
+          <div
+          class="container example"
+          style="height: 80vh; overflow-y: scroll"
+        >
+          <table
+            class="table table-light "
+            style="
+              background-color: white;
+              padding: 30px;
+              text-align: center;
+            "
+          >
+            <thead>
+              <tr>
+                <th colspan="7" scope="col" style="text-align: center; text-transform: uppercase;">
+                  List Products
+                </th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <tr>
+                <th scope="row">.No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Image</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+              <% for(var i=0; i < data.length; i++) { %>
+              <tr>
+                <th scope="row"><%=i+1%></th>
+                <th scope="col"><%= data[i].name %></th>
+                <th scope="col"><%= data[i].price %> VND</th>
+                <th scope="col"><%= data[i].qty %></th>
+                <th scope="col"><img style="width: 50%;height: 100px;" src="<%= data[i].img %>" alt="image <%= data[i].name %> "></th>
+                <th scope="col">
+                 <a href='?edit=<%= data[i].id %>'><button class="btn btn-success">Edit</button></a> 
+                </th>
+                <th scope="col">
+                 <a href='?delete=<%= data[i].id %>'> <button class="btn btn-danger">Delete</button></a>
+                </th>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      
+        </div>
+      </div>
+    </div>
+    
+      
+      
+      
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

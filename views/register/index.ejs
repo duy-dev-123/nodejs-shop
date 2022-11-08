@@ -28,7 +28,12 @@
     <form action="/register" method="POST">
       <input autocomplete="off" type="text" id="login" class="fadeIn second" name="username" placeholder="Username">
       <input autocomplete="new-password" type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-      <p><input type="checkbox" name="role" style="width:auto ;"> <strong>is Admin</strong></p> 
+      <hr>
+      <p><input type="radio" name="role" value="admin" style="width:auto ;"> <strong>is Admin</strong></p> 
+      <hr>
+      <p><input type="radio" name="role" value="shop" style="width:auto ;"> <strong>is Shop</strong></p> 
+      <hr> 
+      <p><input type="radio" name="role" value="user" style="width:auto ;"> <strong>is User</strong></p> 
       <input type="submit" class="fadeIn fourth" value="Register">
     </form>
 

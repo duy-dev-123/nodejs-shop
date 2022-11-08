@@ -26,7 +26,7 @@
   </head>
   <body class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="/admin">Shopping </a>
+      <a class="navbar-brand" href="/user">Shopping </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -42,11 +42,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/admin"
+            <a class="nav-link" href="/user"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
-         
+          <li class="nav-item active">
+            <a class="nav-link" href="/cart"
+              >Cart <span class="sr-only">(current)</span></a
+            >
+          </li>
         </ul>
         <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
           <button class="btn btn-danger my-2 my-sm-0" type="submit">
@@ -63,18 +67,28 @@
           <thead>
             <tr>
               <th scope="row">#</th>
-              <th scope="col">User</th>
-              <th scope="col">Role</th>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Into Money</th>
+              <th> Aciton</th>
             </tr>
           </thead>
           <tbody>
-            <% for(var i=0; i < data.length; i++) { %>
-                <tr>
-                    <th scope="row"><%=i+1%></th>
-                    <th scope="col"><%= data[i].username %></th>
-                    <th scope="col"><%= data[i].roles %></th>
-                </tr>
-                <% } %>
+            <% for(var i=0; i < cart.length; i++) { %>
+            <tr >
+              <th scope="row p-2"><%=i+1%></th>
+              <th scope="col"><img style="height: 100px;" src="<%= cart[i].img %>" alt=""></th>
+              <th scope="col"><%= cart[i].name_product %></th>
+              <th scope="col"><%= cart[i].price %></th>
+              <th scope="col"><%= cart[i].qty %></th>
+              <th scope="col"><%= cart[i].price * cart[i].qty %></th>
+              <th><form action="/remove-cart?id=<%= cart[i].id_order %>" method="POST"><button class="btn btn-danger">Remove</button></form> </th>
+
+            </tr>
+            <% } %>
+            
           </tbody>
         </table>
         </div>
